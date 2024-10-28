@@ -1,9 +1,9 @@
 # 用于指定 Git 忽略的文件和目录
-woom
-.idea
-.vscode
-node_modules
-.DS_Store
-dist
-dist-ssr
-*.local
+#woom
+#.idea
+#.vscode
+#node_modules
+#.DS_Store
+#dist
+#dist-ssr
+#*.local
