@@ -1,0 +1,27 @@
+#这个文件的目的是在代码推送到仓库时，自动触发项目的部署过程，将应用部署到 Fly.io 的服务器上
+#自动部署到 Fly.io 的服务器，是为了实现 持续集成和持续部署（CI/CD）
+name: Deploy to Fly
+
+#指定工作流在代码推送（push）事件发生时触发
+on: [push]
+
+jobs:
+  # 部署作业的定义
+  deploy:
+    # 设置作业名称
+    name: Deploy proxy
+    # 指定运行的操作系统环境
+    runs-on: ubuntu-latest
+    steps:
+      # 检出代码库的步骤
+      - name: Checkout
+        uses: actions/checkout@v4
+      # 设置 Flyctl 的步骤
+      - name: Set flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      # 执行部署到 fly.io 的步骤
+      - name: Deploy to fly.io
+        run: flyctl deploy --remote-only
+        env:
+          # 使用 GitHub Secrets 中的 FLY_API_TOKEN
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

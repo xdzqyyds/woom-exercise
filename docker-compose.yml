@@ -1,0 +1,23 @@
+# 定义docker-compose文件的版本
+version: "3"
+services:
+  # Redis服务配置
+  redis:
+    image: redis:7
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379/tcp"
+
+  # live777服务配置
+  live777:
+    image: ghcr.io/binbat/live777-server:0.5.1
+    container_name: live777
+    hostname: live777
+    ports:
+      - "7777:7777/tcp"
+
+# 网络配置，将 redis 和 live777 服务放在同一个网络中（woom 网络），使得服务之间可以通过容器名称直接相互访问
+networks:
+  default:
+    name: woom
