@@ -1,13 +1,20 @@
-//创建基础组件，用于测试页面是否可以正确渲染
-import React from 'react';
+import { useAtom } from 'jotai'
+import Welcome from './pages/welcome'
+import Meeting from './pages/meeting'
+import { meetingIdAtom } from './store/atom.ts'
 
-function App() {
+// 主组件 WOOM，负责呈现欢迎页面或会议页面
+export default function WOOM() {
+  const [meetingId] = useAtom(meetingIdAtom)
+
   return (
-    <div>
-      <h1>Hello, WOOM!</h1>
+    <div
+      className='min-h-screen'>
+      {
+        !meetingId
+          ? <Welcome />
+          : <Meeting meetingId={meetingId} />
+      }
     </div>
-  );
+  )
 }
-
-export default App;
-
