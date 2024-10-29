@@ -1,7 +1,7 @@
 // React入口文件
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-//import './index.css'    // 导入样式页面，会覆盖APP组件
+import './index.css'    // 导入样式页面
 import 'virtual:uno.css'
 import App from './app'
 import { DevTools } from 'jotai-devtools'
