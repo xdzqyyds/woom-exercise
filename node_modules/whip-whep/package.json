@@ -1,0 +1,37 @@
+{
+	"name": "whip-whep",
+	"version": "1.2.0",
+	"description": "WHIP and WHEP clients",
+	"scripts": {
+		"precommit": "npm run-script lint",
+		"lint": "npx eslint ./ --ext .js --fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/medooze/whip-whep-js.git"
+	},
+	"keywords": [
+		"webrtc",
+		"whip",
+		"whep"
+	],
+	"author": "Sergio Garcia Murillo @ medooze",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/medooze/whip-whep-js/issues"
+	},
+	"homepage": "https://github.com/medooze/whip-whep-js#readme",
+	"devDependencies": {
+		"eslint": "^8.50.0",
+		"eslint-config-medooze": "^1.0.1",
+		"husky": "^8.0.3"
+	},
+	"eslintConfig": {
+		"extends": [
+			"medooze"
+		],
+		"parserOptions": {
+			"sourceType": "module"
+		}
+	}
+}
