@@ -1,7 +1,8 @@
 import { atom } from 'jotai'
 import { atomWithLocation } from 'jotai-location'
 
-// 创建一个用于存储位置信息的atom
+// 创建一个用于存储URL位置信息的atom,其初始值由 atomWithLocation 创建
+//debugLabel 属性设置调试标签，方便在调试工具中识别该 atom
 const locationAtom = atomWithLocation()
 locationAtom.debugLabel = 'location'
 
@@ -24,14 +25,17 @@ interface UserStatus {
 }
 
 // 创建一个用于存储会议ID的atom
+//通过 debugLabel 设置调试标签 meetingIdAtom
 const meetingIdAtom = atom("")
 meetingIdAtom.debugLabel = 'meetingIdAtom'
 
-// 创建一个用于存储会议加入状态的atom
+// 创建一个用于存储会议加入状态的布尔值atom，默认值为false
+// 通过 debugLabel 设置调试标签 meetingJoined
 const meetingJoinedAtom = atom(false)
 meetingJoinedAtom.debugLabel = 'meetingJoined'
 
-// 创建一个用于存储演示流的atom
+// 创建一个用于存储演示流（例如共享屏幕）的atom
+//
 const presentationStreamAtom = atom<UserStream>({
   stream: new MediaStream,
   name: "Presentation",
