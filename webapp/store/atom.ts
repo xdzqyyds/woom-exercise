@@ -14,10 +14,7 @@ interface UserStream {
 
 // 该接口定义用户状态信息
 interface UserStatus {
-  // Nick Name
   name: string
-
-  // Reference: https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/connectionState#value
   state: string
   audio: boolean
   video: boolean
@@ -33,7 +30,7 @@ meetingIdAtom.debugLabel = 'meetingIdAtom'
 const meetingJoinedAtom = atom(false)
 meetingJoinedAtom.debugLabel = 'meetingJoined'
 
-// 创建一个用于存储演示流的atom,数据类型为 UserStream
+// 创建一个用于存储屏幕共享流的atom,数据类型为 UserStream
 //stream 是一个新的 MediaStream 实例
 //name 是一个字符串，表示演示的名称
 const presentationStreamAtom = atom<UserStream>({
@@ -44,6 +41,7 @@ presentationStreamAtom.debugLabel = 'presentationStream'
 
 // 创建一个用于检查演示Presentation是否启用的atom
 // 初始值为 false，当 presentationStreamAtom 的 stream 存在且包含视频轨道时，设置为 true
+//这里的 get => ... 是一个回调函数，Jotai 使用它来获取其他 atom 的值。在这个例子中，get 参数表示一个获取其他 atom 值的函数
 const enabledPresentationAtom = atom(get => get(presentationStreamAtom).stream.getVideoTracks().length !== 0)
 enabledPresentationAtom.debugLabel = 'enabledPresentation'
 
