@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import useWhipClient from "./use/whip"
-import DeviceBar from './device'
+import DeviceBar from './devicebar'
 import Loading from "./svg/loading"
 import Player from './player/player'
 import {

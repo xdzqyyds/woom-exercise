@@ -6,6 +6,7 @@ import { WHEPClient } from 'whip-whep/whep'
 
 //继承 Data 接口并添加了 setRemoteStatus 函数，用于设置远程的用户状态
 interface WHIPData extends Data {
+  connStatus: string,
   setRemoteStatus: (userStatus: Stream) => void,
 }
 
@@ -15,10 +16,10 @@ class WHEPContext extends Context {
   client: WHEPClient = new WHEPClient()
   cache: WHIPData
   remoteStatus: Stream//新添加的属性，初始化 remoteStatus 以存储远程用户的状态
-  connStatus: string = 'new'//新添加的属性，connStatus 用于存储连接状态
   constructor(id: string) {
     super(id)
     this.cache = this.clone()
+    this.cache.connStatus = 'new'; // 初始化 connStatus
     this.remoteStatus = Object.assign({}, this.userStatus)
   }
 
@@ -46,7 +47,7 @@ class WHEPContext extends Context {
     return {
       id: this.id,
       stream: this.stream,
-      connStatus: this.connStatus,
+      connStatus: this.cache.connStatus,
       userStatus: this.userStatus,
       stop: () => this.stop(),
       start: () => this.start(),
@@ -65,7 +66,7 @@ class WHEPContext extends Context {
 
   onconnectionstatechange = () => {
     this.userStatus.state = this.pc.connectionState as StreamState
-    this.connStatus = this.pc.connectionState
+    this.cache.connStatus = this.pc.connectionState
     this.sync()
   }
 

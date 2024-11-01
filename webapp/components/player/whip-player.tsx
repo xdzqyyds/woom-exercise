@@ -1,4 +1,4 @@
-/*负责显示音视频流的播放界面，提供了用户状态的详细信息和流重启的功能*/ 
+/*负责推流，显示音视频流的播放界面，提供了用户状态的详细信息和流重启的功能*/ 
 import { useEffect } from 'react'
 import useWhipClient from '../use/whip'
 import { useAtom } from 'jotai'

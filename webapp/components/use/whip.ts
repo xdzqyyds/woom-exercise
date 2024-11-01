@@ -1,3 +1,6 @@
+/*推流，通过 WHIP 协议实现媒体流的发布和管理，涵盖了音视频设备的切换、连接的管理和自动重启等功能。
+同时，提供了状态同步机制，使外部组件可以实时获取用户状态和连接状态。此文件的设计支持多连接的同时管理，
+确保应用在复杂媒体场景中的稳定性和灵活性 */
 
 //useSyncExternalStore：一个 React Hook，用于在外部数据源发生变化时同步更新 React 组件的状态
 import { useSyncExternalStore } from 'react'
@@ -95,7 +98,7 @@ class WHIPContext extends Context {
 
   sync() {
     this.cache = this.clone()
-    this.dispatchEvent(event)//通知外部模块更新状态，可通过监听 event 事件来响应状态更新
+    this.dispatchEvent(event)//触发事件
   }
 
   /*创建一个新的 WebRTC 连接 (RTCPeerConnection)
@@ -211,6 +214,7 @@ class WHIPContext extends Context {
     this.syncUserStatus(userStatus)
     this.newPeerConnection()
 
+    /*推流*/
     try {
       const url = location.origin + `/whip/${id}`//发布 URL：生成一个 URL（location.origin + /whip/${id}），通常为服务器的路径，用于接收 WebRTC 连接的发布请求
       await client.publish(pc, url)//发布连接：client.publish(pc, url) 使用 WHIPClient 发布 WebRTC 连接，使其在服务器上可用
